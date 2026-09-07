@@ -66,9 +66,9 @@ public class UserPage {
        }
        public void EmployeeMob() {
 		CommonActions.clearAndType(EmployeeNumber, "User435");
-		CommonActions.clearAndType(PrimaryNumber, "7897897896");
+		CommonActions.clearAndType(PrimaryNumber, "7897897898");
 //		CommonActions.clearAndType(AlternativeNumber, "7897897896");
-		CommonActions.clearAndType(Email, "ranjankumarsahu5@gmail.com");
+		CommonActions.clearAndType(Email, "ranjankumarsahu7@gmail.com");
        }
        public void Date() {
 		CommonActions.setDateByJS(FromDate, "2026-06-30");
@@ -119,7 +119,7 @@ public class UserPage {
 
     	    WebDriverWait wait = new WebDriverWait(
     	            DriverManager.getDriver(),
-    	            Duration.ofSeconds(20));
+    	            Duration.ofSeconds(30));
 
     	    // Click Add Record
     	    WebElement addRecord = wait.until(
@@ -131,15 +131,25 @@ public class UserPage {
 
     	    System.out.println("Clicked Add Record");
 
-    	    // Wait until the Add Record button disappears
+    	    // Wait for Add Record button to disappear
     	    wait.until(ExpectedConditions.invisibilityOf(addRecord));
 
-    	    // Wait for the OK button of the success popup
+    	    // Wait for SweetAlert popup to appear
+    	    WebElement popup = wait.until(
+    	            ExpectedConditions.visibilityOfElementLocated(
+    	                    By.cssSelector(".swal2-popup")));
+
+    	    System.out.println("Popup displayed");
+
+    	    // Find OK button inside the popup
     	    WebElement ok = wait.until(
     	            ExpectedConditions.elementToBeClickable(
-    	                    By.xpath("//button[contains(@class,'swal2-confirm') and normalize-space()='OK']")));
+    	                    popup.findElement(
+    	                            By.cssSelector("button.swal2-confirm"))));
 
-    	    ok.click();
+    	    // Click OK
+    	    ((JavascriptExecutor) DriverManager.getDriver())
+    	            .executeScript("arguments[0].click();", ok);
 
     	    System.out.println("Clicked OK");
     	}
