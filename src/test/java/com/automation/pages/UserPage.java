@@ -66,9 +66,9 @@ public class UserPage {
        }
        public void EmployeeMob() {
 		CommonActions.clearAndType(EmployeeNumber, "User435");
-		CommonActions.clearAndType(PrimaryNumber, "7897897895");
+		CommonActions.clearAndType(PrimaryNumber, "7897897896");
 //		CommonActions.clearAndType(AlternativeNumber, "7897897896");
-		CommonActions.clearAndType(Email, "ranjankumarsahu4@gmail.com");
+		CommonActions.clearAndType(Email, "ranjankumarsahu5@gmail.com");
        }
        public void Date() {
 		CommonActions.setDateByJS(FromDate, "2026-06-30");

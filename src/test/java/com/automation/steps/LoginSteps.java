@@ -21,7 +21,7 @@ public class LoginSteps extends CommonActions {
 		   
 
 		   driver.get("https://olampstag.secuodsoft.com/");
-		    driver.manage().window().maximize();
+		   
 	    
 	}
 
