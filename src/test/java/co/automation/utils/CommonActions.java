@@ -38,12 +38,56 @@ public class CommonActions {
     }
 
     public static void selectDropdown(By dropdown, String value) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(20));
 
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+        WebDriverWait wait = new WebDriverWait(
+                DriverManager.getDriver(),
+                Duration.ofSeconds(30));
+
+        WebElement element = wait.until(
+                ExpectedConditions.elementToBeClickable(dropdown));
+
+        wait.until(driver -> {
+
+            Select select = new Select(element);
+
+            for (WebElement option : select.getOptions()) {
+
+                String optionText = option.getText()
+                        .trim()
+                        .replaceAll("\\s+", " ");
+
+                String expectedText = value
+                        .trim()
+                        .replaceAll("\\s+", " ");
+
+                if (optionText.equalsIgnoreCase(expectedText)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
 
         Select select = new Select(element);
-        select.selectByVisibleText(value);
+
+        for (WebElement option : select.getOptions()) {
+
+            String optionText = option.getText()
+                    .trim()
+                    .replaceAll("\\s+", " ");
+
+            String expectedText = value
+                    .trim()
+                    .replaceAll("\\s+", " ");
+
+            if (optionText.equalsIgnoreCase(expectedText)) {
+                select.selectByVisibleText(option.getText());
+                return;
+            }
+        }
+
+        throw new RuntimeException(
+                "Dropdown option not found: " + value);
     }
     
     public static void selectDropValue(By dropdown, String value) {
